@@ -1,0 +1,235 @@
+
+Q1 Question Answers
+
+1.	Use the cat command, and display all the .txt files in the current directory on the screen at one go.
+             Cat temp.txt
+2.	To start any web browser from the command prompt.
+firefox
+
+3.	To list lines that does not include ‘and’ in a text file.
+cat temp.txt |grep -v "and"
+4.	To compress all .dat files in the current directory and vice versa.
+To compress : gzip *.dat
+to uncompress : gunzip *.dat.gz
+5.	To list all the files in the present working directory including the hidden files. 
+ls -a
+6.	To show all the files in the subdirectories of a directory.
+ls -R
+7.	To make changes into environmental variables.
+tcsh
+setenv MYVARIABLE Fred
+echo Hi there $MYVARIABLEs
+8.	To sort the lines of a file into reverse order.
+tac -r file.txt 
+
+9.	To create a hard link to myfile.txt in the current directory assuming that it is not public_html.
+10.	To search for a certain pattern in the files existing in the current directory.
+locate  pattern
+
+
+
+Q2 :  Shell Scripts
+
+
+Q2: Shell Scripts
+
+1)
+read a;
+read b;
+echo Enter 1 for addition, 2 for subtraction, 3 for multiplication, 4 for division, 5 for modulo ;
+read c;
+if [ $c = 1 ]
+then
+echo ` expr $a + $b `;
+elif [ $c = 2 ]
+then
+echo ` expr $a - $b `;
+elif [ $c = 3 ]
+then
+echo ` expr $a \*  $b `;
+elif [ $c = 4 ]
+then
+echo ` expr $a / $b `;
+elif [ $c = 5 ]
+then
+echo ` expr $a % $b `;
+else
+echo Enter number from 1-5 ;
+fi
+
+2)
+read x;
+read y;
+
+    echo "Sum of x and y is `expr $x + $y`"
+    echo "subtraction of x and y is `expr $x - $y`"
+    echo "multiplication of x and y is `expr $x * $y`"
+    echo "division of x and y is `expr $x / $y`"
+
+3)
+echo "Enter two numbers"
+read x;
+read y;
+
+echo "Choose from the following functions"
+echo "1. Addition"
+echo "2. Subtraction"
+echo "3. Multiplication"
+echo "4. Division"
+read c
+
+case $c in
+	 1)
+	 echo "Addition"
+	 echo $x+$y | bc ;; 
+	
+	 2)
+	 echo "Subtraction"
+	 echo $x-$y | bc ;; 
+		
+	 3)
+	 echo "multiplication"
+	 echo $x*$y | bc ;; 
+	
+	 4)
+	 echo "division"
+	 echo $a/$b | bc ;; 
+	
+	
+	
+	 esac #To end the case 
+
+   
+        
+4)
+echo "Enter two numbers"
+read x;
+read y;
+ if [ $x -gt $y ]
+then 
+echo "$x is greater"
+
+elif [ $y -gt $x ]
+then
+echo "$y is greater"
+
+else 
+echo "Both are equal"
+fi
+
+5)
+echo "Enter any number below 50"
+
+read x;
+
+if [ 50 -gt $x ]
+then
+echo $x*$x | bc 
+else
+echo "Number entered is greater than 50"
+fi
+
+6)
+loop=1
+while [ $loop -eq 1 ]
+do
+	echo "Enter a command " 
+	read a
+	$a
+	echo " Do you want to continue [1/0] : "
+	read b
+	if [ $b -eq  1 ]
+		then
+		loop=1
+	else
+		loop=0
+	fi
+done
+
+7)
+echo "Enter initials of month"
+read mon
+
+case $mon in
+"Jan") echo "January";;
+"Janu") echo "January";;
+"Janua") echo "January";;
+"January") echo "January";;
+w) echo "Invalid";;
+esac
+
+8)
+echo " Enter the number of terms of fibonzcci series " 
+read x
+b=1
+c=1
+d=0
+echo $b
+echo $c	
+while [ $x -ne 0 ]
+do
+	d=`expr $b + $c`
+	b=$c
+	c=$d
+	echo $d
+	x=`expr $x - 1`
+done
+		
+9)
+loop=1
+while [ $loop = 1 ]
+do
+	echo " What is the capital of gujarat?"
+	read a	
+
+	case $a in
+		"Gandhinagar")
+		echo "Correct";;
+		
+		"gandhinagar")
+		echo "correct";;
+		
+		*)
+		echo "Wrong";;
+
+		esac
+
+		echo " Do you want to continue [1/0] : "
+	read b
+	if [ $b -eq 1 ]
+		then
+		loop=1
+	else
+		loop=0
+	fi
+done
+
+10)
+echo "Enter total no of elements"
+read n
+i=0
+echo "Enter the elements"
+while [ $i -lt $n ]
+do
+	read a[i]
+	i=`expr $i + 1`
+done
+echo " Enter the element to search"
+read k
+j=0
+flag=0
+while [ $j -lt $n ]
+do 
+	if [ $k -eq $a[j] ]
+		then
+			flag=1
+			break	
+	fi
+	j=`expr $j + 1`
+done
+if [ $flag -eq 1 ]
+	then
+		echo "number is found at `expr $j + 1` position"
+	else 
+		echo " Element is not found"
+fi
