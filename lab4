@@ -1,0 +1,172 @@
+1. Write a shell script to accept numbers below 50 and to display the square of each.
+This should continue as long as the user wishes
+
+sol:
+loop=1
+while [ $loop -eq 1 ]
+do
+	echo "Enter a positive number less than 50"
+	read x
+	if [ $x -le 50 -a $x -gt 0 ]
+		 then  
+		 echo $x*$x | bc
+	elif [ $x -gt 50 -o $x -lt 0 ] 
+		 then 
+		 echo "Negative numbers not allowed"
+	elif [ $x -eq 0 ]
+		 then 
+		 loop=0
+	fi
+done
+
+2. Write a shell script to check whether the scanned string is found in a file or not.
+Display appropriate message.
+
+sol: 
+read a;
+b= grep $a temp.txt;
+if [ $? -eq 0 ]
+then              
+echo character found ;
+fi
+
+3.Write a shell script to generate Fibonacci series.
+
+sol:
+loop=1
+while [ $loop -eq 1 ]
+do
+	echo "Enter a positive number"
+	read x
+	i=1	
+	sum=0
+	while [ $i -le $x ]
+	do
+	sum=`expr $sum + $i`
+	i=`expr $i + 1`
+	done
+	echo "The sum is: $sum"
+	if [ $x -lt 0 ]
+	then
+	loop=0
+	fi
+done
+
+
+4.Write a shell script to check whether the entered number is prime or not.
+
+sol:
+echo Enter positive number 
+read a;
+flag=0
+for (( i=2; i<a; i++ ))
+do
+b=`expr $a % $i`
+if [ $b -eq 0 ]
+then
+flag=1
+fi
+done
+if [ $flag -eq 1 ]
+then
+echo composite
+else
+echo prime number
+fi
+
+5. Write a shell script to calculate HRA of employees depending upon their basic.
+
+sol:
+echo "Enter your basic salary"
+read sal
+if [ $sal -ge 1000 ]
+then
+
+HRA=`expr $sal \* 20 / 100`
+echo "Your Housing and Rent Allowance is $HRA" 
+else
+echo "Your salary should be greater than 1000" 
+fi
+
+6. Write a shell script that greets the user by saying Good Morning, Good Afternoon,
+and Good Evening according to the system time.
+
+sol:
+ d=`date|cut -d " " -f 4|cut -d ":" -f 1`
+if [ $d -gt 0 -a $d -lt 12 ]
+then
+echo Good Morning
+elif [ $d -gt 12 -a $d -lt 16 ]
+then
+echo Good Afternoon
+elif [ $d -gt 16 -a $d -lt 20 ]
+then
+echo Good Evening
+else
+echo Good Night
+fi
+
+7. Write a shell script, which takes a filename as command line argument, asks the user
+if he wants to revoke the read, write permissions for the group and others for that
+particular file. If the answer is “y” then it should do so or else it should abort the
+operation.
+
+sol:
+loop=1
+while [ $loop -eq 1 ]
+do
+echo "Enter a filename: "
+read $1
+echo "Permissioons are :"
+ls -l $1
+echo " Do you want to revoke read and write conditions from the file (y/n)"
+read b
+if [ "$b" = "y" ]
+then chmod -rw echo $1
+echo "After revoking"
+ls -l $1
+echo "Do you wish to continue (y/n):"
+read d
+if [ "$d" = "y" ]
+then loop=1
+else loop=0
+fi
+elif [ "$b" = "n" ]
+then echo "Do you wish to continue (y/n):"
+read c
+if [ "$c" = "y" ]
+then loop=1
+else loop=0
+fi
+else echo "none of the above conditions meet"
+loop=0
+fi
+done
+
+
+8. Write a shell script to count number of newline characters in a file.
+
+sol:
+echo "Enter the name oof file"
+read a
+echo "The new-line count is:"
+wc -l $a
+
+9. Write a shell script to count number of spaces in a file
+
+sol:
+echo enter the filename
+read fname
+n=`cut -d' ' -f 1- $fname | tr ' ' '\n' | wc -l |cut -d' ' -f1 `
+echo $(( n - 1))
+
+
+10.Write a Shell script, which counts the number of words in a file, without taking into
+consideration the blank space, tab spaces and the newline characters using WC.
+
+sol:
+echo "Enter the filname: "
+read a
+echo "The number of words in $a are:"
+wc -w $a
+
