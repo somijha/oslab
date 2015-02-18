@@ -1,0 +1,80 @@
+1. Write a Shell script to accept a string as command line argument and reverse the
+same.
+
+ans:
+
+
+	echo "Enter a string"
+	read x #string
+	echo $x | rev
+	
+2. Write a shell script to check if the input string is a palindrome.
+
+ans:
+echo "Enter a string"
+read x #string
+
+x1=`echo $x|rev` #reversing the string and storing it in x1
+if [ $x == $x1 ]
+then
+echo "string is palindrome"
+else
+echo "string is not palindrome"
+fi
+
+3. Write a shell script to accept a number and a word as command line arguments
+and print the word the given number of times on each line.
+
+ans:
+# yes $1 | head -n $2
+echo "Enter a word"
+read x #word
+echo "Enter a number"
+read y
+
+yes $x | head -n $y
+
+
+4. Write a shell script to find the file or directory with the maximum size in the
+current directory.
+
+ans:
+ls -S | head -n 1
+
+5. Write a shell script to accept two filenames and check if both exist. If the second
+filename exists, then the contents of the first filename should be appended to it. If
+the second filename does not exist then create a newfile with the contents of the
+first file.
+
+ans:
+echo "Enter first file name"
+read x #first filename
+echo "Enter second filename"
+read y #second filename
+
+
+if [ -f $x -a -f $y ]  #checking whether the file exists or not
+then 
+echo "Both the file exist"
+
+elif [ -f $y -a ! -f $x ]
+then
+cat $x>>$y #appending contents of x to y
+
+elif [ ! -f $y ]
+then
+#touch new.txt #creating a new file
+cat $x>$y #appending contents of x to new file
+
+else
+echo "don't know what is happening"
+fi
+
+6. Write a shell script to accept a number in the command line and displays the sum
+up to that number. By default, the sum up to 50 should be displayed.
+
+
+ans:
+
+7. Write a shell script to accept an alphabet from the user and list all the
+files/directory starting with that alphabet in the current directory
