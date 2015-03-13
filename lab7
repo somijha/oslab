@@ -1,0 +1,109 @@
+#include<iostream.h>
+#include<stdio.h>
+void main()
+{
+	int i;
+	int j;
+
+	int process , resource, ins, count1,count2,k;
+	
+	printf("\n Enter number of process:\n");
+	scanf("%d",&process);
+	printf("\n Enter number of resources:\n");
+	scanf("%d",&resource);
+	
+	int avail[resource], int resou[resource],int claim[process][resource], int alloc[process][resource], int need[process][resource], int max[process][resource];
+
+
+for (i=0; i<process; i++)
+{
+	completed[i]=0;
+}
+for (j=0; j<resource; j++)
+{
+	printf("\nEnter no. of available instances\n");
+	scanf("%d",&ins);
+	avail[resource]=ins;
+}
+
+printf("\n\tEnter Maximum No. of instances of resources that a Process need:\n");
+	    for(i=0;i<process;i++)
+	     {
+	        printf("\n\t For P[%d]",i);
+	 
+	        for(j=0;j<resource;j++)
+	         {
+	            printf("\t");
+	 
+	            scanf("%d",&ins);
+	 
+	            max[i][j]=ins;              
+	         }
+	     }    
+	    printf("\n\t Enter no. of instances already allocated to process of a resource:\n");
+	 
+	     for(i=0;i<process;i++)
+	     {
+	        printf("\n\t For P[%d]\t",i);
+	 
+	        for(j=0;j<resource;j++)
+	         {
+	            printf("\t\t");
+	 
+	            scanf("%d",&ins);
+	 
+	            alloc[i][j]=ins;
+	 
+	            need[i][j]=max[i][j]-alloc[i][j];       //calculating Need of each process
+	         } 
+	    }
+	    printf("\n\t Safe Sequence is:- \t");
+	 
+	    while(count1!=process)
+	    {
+	    count2=count1;
+	 
+	    for(i=0;i<process;i++)
+	     {
+	 
+	       for(j=0;j<resource;j++)
+	        {
+	            if(need[i][j]<=avail[j])
+	              {
+	                 k++;
+	              }  
+	             
+	        }    
+	        if(k==resource && completed[i]==0 )
+	         {
+	           printf("P[%d]\t",i);
+	 
+	           completed[i]=1;
+	 
+	           for(j=0;j<resource;j++)
+	             {
+	             
+	               avail[j]=avail[j]+alloc[i][j];
+	            
+	             } 
+	             count1++;
+	              
+	         }
+	         k=0;
+	       }
+	  
+	         if(count1==count2)
+	         {
+	         printf("\t\t Stop ..After this.....Deadlock \n");
+	 
+	         break;
+	       } 
+	 }
+	   getch();
+	}            
+}
+
+			
+
+		
+
